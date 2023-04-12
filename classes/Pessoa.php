@@ -57,8 +57,9 @@ class Pessoa {
         $conn = self::getConnection();
         $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $result = $conn->query("SELECT * FROM pessoa WHERE id = '{$id}'");
-        return $result->fetch();
+        $result = $conn->prepare("SELECT * FROM pessoa WHERE id = :id");
+        $result->bindParam(':id', $id);
+        $result->execute();
     }
 
     public static function delete($id) {
@@ -69,7 +70,7 @@ class Pessoa {
     }
 
     public static function all() {
-        $conn = new PDO('mysql:host=localhost;dbname=livro', 'lima', 'lima123');
+        $conn = self::getConnection();
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $result = $conn->query("SELECT * FROM pessoa ORDER BY id");
