@@ -65,15 +65,17 @@ class Pessoa {
     public static function delete($id) {
         $conn = self::getConnection();
         $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $result = $conn->query("DELETE FROM pessoa WHERE id = '{$id}'");
-        return $result->fetch();
+        $result = $conn->prepare("DELETE FROM pessoa WHERE id = :id");
+        $result -> bindParam(':id', $id);
+        $result->execute();
     }
 
     public static function all() {
         $conn = self::getConnection();
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        $result = $conn->query("SELECT * FROM pessoa ORDER BY id");
+        
+        $result = $conn->prepare("SELECT * FROM pessoa ORDER BY id");
+        $result->execute();
         return $result->fetchAll();
 
     }
