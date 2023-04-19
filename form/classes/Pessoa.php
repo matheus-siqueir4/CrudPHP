@@ -6,7 +6,7 @@ class Pessoa {
 
     public static function getConnection() {        
         if (empty(self::$conn)) { 
-            $conexao = parse_ini_file('../config/livro.ini');
+            $conexao = parse_ini_file('config/livro.ini');
             $host = $conexao['host'];
             $db = $conexao['db'];
             $user = $conexao['user'];
@@ -66,7 +66,7 @@ class Pessoa {
         $conn = self::getConnection();
         $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $result = $conn->prepare("DELETE FROM pessoa WHERE id = :id");
-        $result -> bindParam(':id', $id);
+        $result->bindParam(':id', $id);
         $result->execute();
     }
 

@@ -1,7 +1,7 @@
 <?php
 
-require_once '../classes/Pessoa.php';
-require_once '../classes/Cidade.php';
+require_once 'classes/Pessoa.php';
+require_once 'classes/Cidade.php';
 
 class PessoaForm {
     private $html;
@@ -9,7 +9,7 @@ class PessoaForm {
 
     public function __construct() {
         
-        $this->html = file_get_contents('../html/form.html');
+        $this->html = file_get_contents('html/form.html');
         $this->data = [
             'id'        => '',
             'nome'      => '',
@@ -52,7 +52,7 @@ class PessoaForm {
         $this->html = str_replace('{id_cidade}', $this->data['id_cidade'], $this->html);
 
         $this->html = str_replace("option value='{$this->data['id_cidade']}'",
-        "<option selected=1 value='{$this->data['id_cidade']}'", $this->html);
+        "option selected=1 value='{$this->data['id_cidade']}'", $this->html);
         
         print $this->html;
     }

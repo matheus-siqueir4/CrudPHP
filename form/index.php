@@ -13,6 +13,12 @@ if (class_exists($classe)) {
     $pagina = new $classe($_REQUEST);
 }
 
+if (empty($method)) {
+    return $pagina->show();
+}
 if (!empty($method) and (method_exists($classe, $method))) {
+    $pagina->$method($_REQUEST);
     $pagina->show();
+
+
 }

@@ -6,7 +6,7 @@ class Cidade {
 
     public static function getConnection() {
         if (empty(self::$conn)) {
-            $conexao = parse_ini_file('../config/livro.ini');
+            $conexao = parse_ini_file('config/livro.ini');
             $host = $conexao['host'];
             $db = $conexao['db'];
             $user = $conexao['user'];
